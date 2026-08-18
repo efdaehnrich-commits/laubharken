@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Laubharken von Emil und Til – zuverlässige Hilfe beim Laubharken in Gärten und auf Grundstücken." />
+  <title>Laubharken – Emil & Til</title>
+  <style>
+    :root {
+      --cream: #fff8ec;
+      --paper: #fff3df;
+      --brown: #7e3024;
+      --dark: #52231c;
+      --orange: #ef761e;
+      --gold: #c87917;
+      --line: #d38a2b;
+      --shadow: 0 18px 45px rgba(90, 42, 20, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(239,118,30,.10), transparent 22%),
+        radial-gradient(circle at 85% 70%, rgba(200,121,23,.10), transparent 25%),
+        var(--cream);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        radial-gradient(#b66b25 0.7px, transparent 0.7px),
+        radial-gradient(#8e3e2b 0.5px, transparent 0.5px);
+      background-size: 19px 19px, 31px 31px;
+      background-position: 0 0, 7px 11px;
+      mix-blend-mode: multiply;
+    }
+
+    .leaves {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 145px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .leaf {
+      position: absolute;
+      font-size: 72px;
+      filter: drop-shadow(0 5px 4px rgba(80,35,20,.14));
+      transform: rotate(var(--r));
+    }
+    .l1 { left: 2%; top: -22px; --r: -28deg; }
+    .l2 { left: 15%; top: -38px; --r: 16deg; }
+    .l3 { left: 43%; top: -45px; --r: -5deg; font-size: 92px; }
+    .l4 { right: 16%; top: -34px; --r: 20deg; }
+    .l5 { right: 1%; top: -20px; --r: -25deg; }
+
+    header {
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
+      padding: 110px 20px 70px;
+      position: relative;
+    }
+
+    .hero {
+      width: min(1000px, 100%);
+      text-align: center;
+      background: rgba(255, 248, 236, .84);
+      border: 1px solid rgba(190, 115, 32, .18);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(5px);
+      padding: clamp(35px, 7vw, 75px) clamp(22px, 7vw, 80px);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--orange);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .82rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 11vw, 8rem);
+      line-height: .88;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: -.045em;
+    }
+
+    .brush {
+      width: min(620px, 88%);
+      height: 25px;
+      margin: 26px auto 30px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #ee8c6f, #d95f45, #ef9078);
+      transform: rotate(-1deg);
+      box-shadow: 0 4px 0 rgba(160,60,35,.08);
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 25px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(100, 40, 20, .16);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+    }
+
+    .btn-secondary {
+      color: var(--brown);
+      background: #fff;
+      border: 2px solid rgba(126,48,36,.2);
+    }
+
+    section {
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin: 0 0 28px;
+      color: var(--dark);
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 85px;
+      height: 6px;
+      margin: 13px auto 0;
+      border-radius: 99px;
+      background: var(--orange);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px 24px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(126,48,36,.12);
+      border-radius: 25px;
+      box-shadow: 0 10px 28px rgba(80,35,20,.08);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: var(--dark);
+    }
+
+    .card p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .offer {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .offer-main, .price {
+      border-radius: 28px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    .offer-main {
+      background: #fff;
+    }
+
+    .offer-main h3 {
+      margin-top: 0;
+      font-size: 1.7rem;
+      color: var(--dark);
+    }
+
+    .offer-main ul {
+      padding-left: 20px;
+      line-height: 1.9;
+    }
+
+    .price {
+      background: linear-gradient(145deg, #f0781e, #d85c18);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .price small {
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 800;
+      opacity: .85;
+    }
+
+    .price strong {
+      font-size: clamp(3.5rem, 7vw, 5rem);
+      line-height: 1;
+      margin: 10px 0;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .contact {
+      text-align: center;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(126,48,36,.12);
+      border-radius: 32px;
+      padding: clamp(30px, 6vw, 55px);
+      box-shadow: var(--shadow);
+    }
+
+    .phone {
+      display: inline-block;
+      margin: 12px 0 22px;
+      color: var(--brown);
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+
+    .phone:hover { color: var(--orange); }
+
+    footer {
+      text-align: center;
+      padding: 25px 16px 45px;
+      color: rgba(82,35,28,.68);
+      font-size: .92rem;
+    }
+
+
+    .location-card {
+      text-align: center;
+      margin-top: -35px;
+    }
+
+    .maps-logo {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      background: #ea4335;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 18px rgba(234, 67, 53, .25);
+    }
+
+    .maps-logo::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .location-card h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--dark);
+    }
+
+    @media (max-width: 760px) {
+      .location-card { margin-top: -20px; }
+    }
+
+    @media (max-width: 760px) {
+      header { min-height: auto; padding-top: 95px; }
+      .cards, .offer { grid-template-columns: 1fr; }
+      .hero { border-radius: 24px; padding: 38px 18px 32px; }
+      h1 { font-size: clamp(3.2rem, 18vw, 5.5rem); }
+      .hero p { font-size: 1.05rem; line-height: 1.5; }
+      .actions { flex-direction: column; align-items: center; gap: 10px; margin-top: 25px; }
+      .btn { width: 100%; min-height: 52px; }
+      section { width: min(100% - 20px, 1000px); margin-bottom: 45px; }
+      .section-title { font-size: 2.2rem; }
+
+      /* Alles auf dem Handy mittig ausrichten */
+      .card, .offer-main {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .card { padding: 24px 20px; }
+      .offer-main, .price { padding: 26px 22px; }
+      .offer-main h3 { font-size: 1.5rem; }
+
+      /* Listen als Block mittig ausrichten, Text darin sauber linksbündig */
+      .offer-main ul, .card ul {
+        display: inline-block;
+        margin: 0 auto;
+        padding-left: 20px;
+        text-align: left;
+        list-style-position: outside;
+        line-height: 1.65;
+      }
+      .price strong { font-size: 4rem; }
+      .contact { padding: 28px 18px; border-radius: 24px; }
+      .phone { font-size: 1.9rem; word-break: keep-all; }
+
+      /* Handy: Inhalte sauber mittig ausrichten */
+      .hero,
+      .section-title,
+      .location-card,
+      .contact {
+        text-align: center;
+      }
+
+      .offer-main,
+      .price,
+      .card {
+        text-align: center;
+      }
+
+      .offer-main ul,
+      .card ul {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .location-card {
+        width: min(100% - 20px, 1000px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .leaves { height: 90px; }
+      .leaf { font-size: 40px; }
+      .l3 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="leaves" aria-hidden="true">
+    <div class="leaf l1">🍁</div>
+    <div class="leaf l2">🍂</div>
+    <div class="leaf l3">🍁</div>
+    <div class="leaf l4">🍂</div>
+    <div class="leaf l5">🍁</div>
+  </div>
+
+  <header>
+    <div class="hero">
+      <div class="eyebrow">Herbst • Garten • Hilfe</div>
+      <h1>Laubharken</h1>
+      <div class="brush"></div>
+      <p>
+        Wir sind zwei 13-jährige Jungs (Emil und Til)
+        und bieten unsere Hilfe beim Laubharken an. Wir helfen Ihnen gerne dabei, Ihre Gärten und
+        Grundstücke von Laub zu befreien.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/4915566217863" target="_blank" rel="noopener">💬 WhatsApp schreiben</a>
+        <a class="btn btn-secondary" href="#angebot">Mehr erfahren</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2 class="section-title">Warum wir?</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">⭐</div>
+          <h3>Wir wollen selbstständig sein</h3>
+          <ul>
+            <li>Wir zeigen, dass wir zuverlässig sind.</li>
+            <li>Wir lernen Verantwortung zu übernehmen.</li>
+            <li>Wir sammeln Erfahrungen für später.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="icon">💪</div>
+          <h3>Zuverlässig</h3>
+          <p>Wir arbeiten ordentlich, sorgfältig und zuverlässig – damit am Ende alles sauber aussieht.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🍂</div>
+          <h3>Wir haben keine Angst vor Laub</h3>
+          <ul>
+            <li>Kein Blatt ist vor uns sicher</li>
+            <li>Wir kommen mit jedem Blätterberg klar</li>
+            <li>Kein Blatt ist zu viel</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="angebot">
+      <h2 class="section-title">Unser Angebot</h2>
+      <div class="offer">
+        <div class="offer-main">
+          <h3>Laubharken</h3>
+          <ul>
+            <li>Laubharken in Gärten und auf Grundstücken</li>
+            <li>Gesammeltes Laub an den vereinbarten Platz bringen</li>
+            <li>Ordentliche und zuverlässige Arbeit</li>
+            <li>Preis nach Vereinbarung</li>
+          </ul>
+        </div>
+        <div class="price">
+          <small>Preis</small>
+          <strong>VB</strong>
+          <span>Wir vereinbaren den Preis passend zum Auftrag.</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="location-card" aria-label="Einsatzgebiet">
+      <div class="maps-logo" aria-hidden="true"></div>
+      <h2>Laubharken in Falkensee &amp; Dallgow</h2>
+    </section>
+    <section>
+      <div class="contact">
+        <h2 class="section-title">Wichtig</h2>
+        <p>
+          Sie müssen einen Platz bereitstellen,<br>
+          wo wir die gesammelten Laubblätter<br>
+          hinbringen können.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="contact">
+        <h2 class="section-title">Kontakt</h2>
+        <p>Interesse? Einfach eine SMS schreiben.</p>
+        <a class="phone" href="sms:+4915566217863">+49 15566 217863</a>
+        <div>
+          <a class="btn btn-primary" href="sms:+4915566217863">💬 Kontakt aufnehmen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Emil & Til · Laubharken
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
